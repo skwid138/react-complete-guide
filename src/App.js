@@ -8,7 +8,9 @@ class App extends Component {
       { name: 'Hunter', age: 27 },
       { name: 'Banjo', age: 2 },
       { name: 'Jerry', age: 83 }
-    ]
+    ],
+    otherState: 'someother value',
+    showPersons: false
   }
 
   // naming methods with 'Handler' that are not called, but are assigned to events is a recomended naming convention
@@ -40,6 +42,11 @@ class App extends Component {
     )
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons
+    this.setState({showPersons: !doesShow})
+  }
+
   /* When passing method references using bind is typically a better option then using a fat arrow to call the method */
 
   render() {
@@ -52,31 +59,37 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          { 
+            this.state.persons.map(person => {
+              return (
+                <Person 
+                  name={ person.name } 
+                  age={ person.age } 
+                />
+              )
+            }) 
+          }
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React app</h1>
         <p>It's working?</p>
         <button
           style={ style }
-          onClick={ () => this.switchNameHandler() }>
-          Switch Name
+          onClick={ this.togglePersonHandler }>
+          Show People
         </button>
-        <Person 
-          name={ this.state.persons[0].name } 
-          age={ this.state.persons[0].age } 
-        />
-        <Person 
-          name={ this.state.persons[1].name } 
-          age={ this.state.persons[1].age } 
-          changed={ this.nameChangeHandler }
-        />
-        <Person 
-          name={ this.state.persons[2].name } 
-          age={ this.state.persons[2].age }
-          click={ this.switchNameHandler.bind(this, 'Jeronimo') }
-        >
-          Some more things here
-        </Person>
+        
+        { persons }
+
       </div>
     )
 
