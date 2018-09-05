@@ -4,7 +4,8 @@
         "node": true,
         "es6": true,
         "browser": true
-    },
+	},
+	"parser": "babel-eslint",
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -20,12 +21,13 @@
     "rules": {
         "strict": ["error", "global"],
         "indent": [2, "tab"],
-        "no-mixed-spaces-and-tabs": 2,
+        "no-mixed-spaces-and-tabs": 0,
         "quotes": [2, "single"],
         "no-trailing-spaces": [2, {"skipBlankLines": false}],
         "no-unused-vars": ["error", { "args": "none" }],
         "space-in-parens": ["error", "never"],
         "semi": [2, "always"],
-        "react/prop-types": [0, "never"]
+		"react/prop-types": [0, "never"],
+		"no-console": 0
   }
 }
