@@ -1,19 +1,27 @@
-import React from 'react'
-import './Person.css'
+import React from 'react';
+import Radium from 'radium';
+import './Person.css';
 
 /* When using class based components this.props must be used */
 /* props,children allows you to access anything passed between the component tags */
 const person = props => {
 
-    // <p>This is a random number { Math.floor(Math.random() * 30) }</p>
+	const style = {
+		'@media (min-width: 500px)': {
+			width: '450px'
+		}
+	};
 
-    return (
-        <div className="Person">
-            <p onClick={ props.click }>I'm {props.name} and I'm { props.age } years old.</p>
-            <p>{ props.children }</p>
-            <input type="text" onChange={ props.changed } value={ props.name }/>
-        </div>
-    )
-}
+	// <p>This is a random number { Math.floor(Math.random() * 30) }</p>
 
-export default person
+	return (
+	// CSS rules will apply inline style over class styling
+		<div className="Person" style={ style }>
+			<p onClick={ props.click }>I&apos;m {props.name} and I&apos;m { props.age } years old.</p>
+			<p>{ props.children }</p>
+			<input type="text" onChange={ props.changed } value={ props.name }/>
+		</div>
+	);
+};
+
+export default Radium(person);
