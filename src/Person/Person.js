@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 import './Person.css';
 
 /* When using class based components this.props must be used */
@@ -7,9 +6,6 @@ import './Person.css';
 const person = props => {
 
 	const style = {
-		'@media (min-width: 500px)': {
-			width: '450px'
-		}
 	};
 
 	// <p>This is a random number { Math.floor(Math.random() * 30) }</p>
@@ -24,4 +20,4 @@ const person = props => {
 	);
 };
 
-export default Radium(person);
+export default person;

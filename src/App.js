@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// StyleRoot is needed for using advanced features like media queiries
-import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -56,12 +54,7 @@ class App extends Component {
       font: 'inheirt',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      // Suedo selectors are not normally supported, but with Radium wrapping the export this works
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
 
     let persons = null;
@@ -86,10 +79,6 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'tomato',
-        color: 'black'
-      };
     }
 
     /* Dynamically build class list to apply to p tag below */
@@ -103,22 +92,20 @@ class App extends Component {
     }
 
     return (
-		<StyleRoot>
-			<div className="App">
-        		<h1>Hi, I'm a React app</h1>
-        		<p className={ classes.join(' ') }>It's working?</p>
-        		<button
-          			style={ style }
-          			onClick={ this.togglePersonHandler }>
-          			Show People
-        		</button>
-        		{ persons }
-      		</div>
-		</StyleRoot>
+		<div className="App">
+			<h1>Hi, I'm a React app</h1>
+			<p className={ classes.join(' ') }>It's working?</p>
+			<button
+				style={ style }
+				onClick={ this.togglePersonHandler }>
+				Show People
+			</button>
+			{ persons }
+		</div>
     );
 
     // return React.createElement('div', {className:'App'}, React.createElement('h1', null,'worrrrrd'))
   }
 }
 
-export default Radium(App);
+export default App;
