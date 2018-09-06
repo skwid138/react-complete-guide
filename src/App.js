@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 // ? https://www.npmjs.com/package/eslint-plugin-react
 
@@ -11,7 +12,7 @@ class App extends Component {
   		{ id: 2, name: 'Banjo', age: 2 },
   		{ id: 3, name: 'Jerry', age: 83 }
   	],
-  	otherState: 'someother value',
+  	otherState: 'some other value',
   	showPersons: false
   };
 
@@ -58,13 +59,14 @@ class App extends Component {
   				{
   					this.state.persons.map((person, index) => {
   						return (
-  							<Person
-  								click={() => this.deletePersonHandler(index) }
-  								name={ person.name }
-  								age={ person.age }
-  								key={ person.id }
-  								changed={ event => this.nameChangeHandler(event, person.id) }
-  							/>
+  							<ErrorBoundary key={ person.id }>
+  								<Person
+  									click={() => this.deletePersonHandler(index) }
+  									name={ person.name }
+  									age={ person.age }
+  									changed={ event => this.nameChangeHandler(event, person.id) }
+  								/>
+  							</ErrorBoundary>
   						);
   					})
   				}
