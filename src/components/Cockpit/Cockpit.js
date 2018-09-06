@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Cockpit.css';
+/* Components are stateless or "functional" and typically will not manipulate state */
 
 const cockpit = props => {
 
@@ -23,6 +24,7 @@ const cockpit = props => {
 	return (
 		<div className={ classes.Cockpit }>
 			<h1>Hi, I&apos;m a React app?</h1>
+			<h3>{ props.appTitle }</h3>
   			<p className={ assignedClasses.join(' ') }>Cow Party Anyone?</p>
   			<button
 			  className={ btnClass }

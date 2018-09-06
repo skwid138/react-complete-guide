@@ -5,8 +5,22 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 /* Components that manage state should do very little UI manipulation */
 /* Their render output should be lean with little JSX */
+/* Containers are stateful and will track and update state */
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		console.log('[App.js] Inside Constructor', props);
+	}
+
+	componentWillMount() {
+		console.log('[App.js] Inside componentWillMount()');
+	}
+
+	componentDidMount() {
+		console.log('[App.js] Inside componentDidMount()');
+	}
+
   state = {
   	people: [
   		{ id: 1, name: 'Hunter', age: 27 },
@@ -42,6 +56,7 @@ class App extends Component {
   };
 
   render() {
+  	console.log('[App.js] Inside render()');
   	let people = null;
   	if (this.state.showPeople) {
   		people = <People
@@ -53,6 +68,7 @@ class App extends Component {
   	return (
   		<div className={ classes.App }>
   			<Cockpit
+			  appTitle={ this.props.title }
 			  showPeople={ this.state.showPeople }
 			  people={ this.state.people }
 			  clicked={ this.togglePersonHandler }/>
