@@ -48,16 +48,9 @@ class App extends Component {
 
   render() {
   	/* Using Style like this is a way to scope the styles, but only allows for inline styles which makes certain things more difficult */
-  	const style = {
-  		backgroundColor: 'green',
-  		color: 'white',
-  		font: 'inheirt',
-  		border: '1px solid blue',
-  		padding: '8px',
-  		cursor: 'pointer'
-  	};
 
   	let persons = null;
+  	let btnClass = '';
 
   	if (this.state.showPersons) {
   		persons = (
@@ -76,9 +69,10 @@ class App extends Component {
   					})
   				}
   			</div>
-  		);
+		  );
 
-  		style.backgroundColor = 'red';
+		  btnClass = classes.red;
+
   	}
 
   	/* Dynamically build class list to apply to p tag below */
@@ -96,15 +90,13 @@ class App extends Component {
   			<h1>Hi, I&apos;m a React app</h1>
   			<p className={ assignedClasses.join(' ') }>It&apos;s working?</p>
   			<button
-  				style={ style }
+			  className={ btnClass }
   				onClick={ this.togglePersonHandler }>
 				Show People
   			</button>
   			{ persons }
   		</div>
   	);
-
-  	// return React.createElement('div', {className:'App'}, React.createElement('h1', null,'worrrrrd'))
   }
 }
 
