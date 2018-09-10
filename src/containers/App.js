@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.css';
 import People from '../components/People/People';
 import Cockpit from '../components/Cockpit/Cockpit';
@@ -7,7 +7,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 /* Their render output should be lean with little JSX */
 /* Containers are stateful and will track and update state */
 
-class App extends Component {
+class App extends PureComponent {
 	constructor(props) {
 		super(props);
 		console.log('[App.js] Inside Constructor', props);
@@ -21,61 +21,77 @@ class App extends Component {
 		console.log('[App.js] Inside componentDidMount()');
 	}
 
-  state = {
-  	people: [
-  		{ id: 1, name: 'Hunter', age: 27 },
-  		{ id: 2, name: 'Banjo', age: 2 },
-  		{ id: 3, name: 'Jerry', age: 83 }
-  	],
-  	showPeople: false
-  };
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState);
+	// 	return nextState.people !== this.state.people ||
+	// 		nextState.showPeople !== this.state.showPeople;
+	// 	//return true;
+	// }
 
-  deletePersonHandler = personIndex => {
-  	const people = [...this.state.people]; // To avoid mutating the original array "immutable"
-  	people.splice(personIndex, 1); // remove the person
+	componentWillUpdate(nextProps, nextState) {
+		console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState);
+	}
 
-  	this.setState({people: people}); // update state
-  };
+	componentDidUpdate() {
+		console.log('[UPDATE App.js] Inside componentDidUpdate()');
+	}
 
-  nameChangeHandler = (event, id) => {
-  	const personIndex = this.state.people.findIndex(person => {
-  		return person.id === id;
-  	});
+	state = {
+		people: [
+			{ id: 1, name: 'Hunter', age: 27 },
+			{ id: 2, name: 'Banjo', age: 2 },
+			{ id: 3, name: 'Jerry', age: 83 }
+		],
+		showPeople: false
+	};
 
-  	const person = {...this.state.people[personIndex]};
-  	person.name = event.target.value;
+	deletePersonHandler = personIndex => {
+		const people = [...this.state.people]; // To avoid mutating the original array "immutable"
+		people.splice(personIndex, 1); // remove the person
 
-  	const people = [...this.state.people];
-  	people[personIndex] = person;
+		this.setState({people: people}); // update state
+	};
 
-  	this.setState({people: people});
-  };
+	nameChangeHandler = (event, id) => {
+		const personIndex = this.state.people.findIndex(person => {
+			return person.id === id;
+		});
 
-  togglePersonHandler = () => {
-  	this.setState({showPeople: !this.state.showPeople});
-  };
+		const person = {...this.state.people[personIndex]};
+		person.name = event.target.value;
 
-  render() {
-  	console.log('[App.js] Inside render()');
-  	let people = null;
-  	if (this.state.showPeople) {
-  		people = <People
-		  people={ this.state.people }
-		  clicked={ this.deletePersonHandler }
-		  changed={ this.nameChangeHandler }/>;
-  	}
+		const people = [...this.state.people];
+		people[personIndex] = person;
 
-  	return (
-  		<div className={ classes.App }>
-  			<Cockpit
-			  appTitle={ this.props.title }
-			  showPeople={ this.state.showPeople }
-			  people={ this.state.people }
-			  clicked={ this.togglePersonHandler }/>
-  			{ people }
-  		</div>
-  	);
-  }
+		this.setState({people: people});
+	};
+
+	togglePersonHandler = () => {
+		this.setState({showPeople: !this.state.showPeople});
+	};
+
+	render() {
+		console.log('[App.js] Inside render()');
+		let people = null;
+		if (this.state.showPeople) {
+			people = <People
+				people={ this.state.people }
+				clicked={ this.deletePersonHandler }
+				changed={ this.nameChangeHandler }/>;
+		}
+
+		return (
+			<div className={ classes.App }>
+				<button onClick={ () => this.setState({showPeople: true}) }>Show People</button>
+				<Cockpit
+					appTitle={ this.props.title }
+					showPeople={ this.state.showPeople }
+					people={ this.state.people }
+					clicked={ this.togglePersonHandler }/>
+				{ people }
+			</div>
+		);
+	}
 }
 
 export default App;

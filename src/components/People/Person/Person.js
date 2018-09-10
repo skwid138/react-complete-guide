@@ -5,19 +5,6 @@ import classes from './Person.css';
 /* When using class based components this.props must be used */
 /* props,children allows you to access anything passed between the component tags */
 class Person extends Component {
-	constructor(props) {
-		super(props);
-		console.log('[Person.js] Inside Constructor', props);
-	}
-
-	componentWillMount() {
-		console.log('[Person.js] Inside componentWillMount()');
-	}
-
-	componentDidMount() {
-		console.log('[Person.js] Inside componentDidMount()');
-	}
-
 	render() {
 		console.log('[Person.js] Inside render()');
 		return (
