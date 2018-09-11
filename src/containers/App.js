@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import classes from './App.css';
 import People from '../components/People/People';
 import Cockpit from '../components/Cockpit/Cockpit';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/WithClass';
 
 /* Components that manage state should do very little UI manipulation */
 /* Their render output should be lean with little JSX */
@@ -79,9 +81,9 @@ class App extends PureComponent {
 				clicked={ this.deletePersonHandler }
 				changed={ this.nameChangeHandler }/>;
 		}
-
+		// classes={ classes.App }
 		return (
-			<div className={ classes.App }>
+			<Aux>
 				<button onClick={ () => this.setState({showPeople: true}) }>Show People</button>
 				<Cockpit
 					appTitle={ this.props.title }
@@ -89,9 +91,9 @@ class App extends PureComponent {
 					people={ this.state.people }
 					clicked={ this.togglePersonHandler }/>
 				{ people }
-			</div>
+			</Aux>
 		);
 	}
 }
 
-export default App;
+export default withClass(App, classes.App);

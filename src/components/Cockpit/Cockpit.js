@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Cockpit.css';
+import Aux from '../../hoc/Aux';
 /* Components are stateless or "functional" and typically will not manipulate state */
 
 const cockpit = props => {
@@ -7,10 +8,10 @@ const cockpit = props => {
 	/* Dynamically build class list to apply to p tag below */
   	/* p tag uses join with white space to make sure classes are separated */
 	const assignedClasses = [];
-	let btnClass = '';
+	let btnClass = classes.Button;
 
 	if (props.showPeople) {
-		btnClass = classes.Red;
+		btnClass = [classes.Button, classes.Red].join(' ');
 	}
 
 
@@ -22,7 +23,7 @@ const cockpit = props => {
   	}
 
 	return (
-		<div className={ classes.Cockpit }>
+		<Aux>
 			<h1>Hi, I&apos;m a React app?</h1>
 			<h3>{ props.appTitle }</h3>
   			<p className={ assignedClasses.join(' ') }>Cow Party Anyone?</p>
@@ -31,7 +32,7 @@ const cockpit = props => {
   				onClick={ props.clicked }>
 				Toggle People
   			</button>
-		</div>
+		</Aux>
 	);
 };
 

@@ -28,6 +28,7 @@
         "space-in-parens": ["error", "never"],
         "semi": [2, "always"],
 		"react/prop-types": [0, "never"],
+		"react/display-name": [0, { "ignoreTranspilerName": true }],
 		"no-console": 0
   }
 }
