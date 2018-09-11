@@ -44,7 +44,8 @@ class App extends PureComponent {
 			{ id: 2, name: 'Banjo', age: 2 },
 			{ id: 3, name: 'Jerry', age: 83 }
 		],
-		showPeople: false
+		showPeople: false,
+		toggleClicked: 0
 	};
 
 	deletePersonHandler = personIndex => {
@@ -69,7 +70,18 @@ class App extends PureComponent {
 	};
 
 	togglePersonHandler = () => {
-		this.setState({showPeople: !this.state.showPeople});
+		/* Do not reference this.state inside of the setState method as it is asynchronous */
+		// this.setState({
+		// 	showPeople: !this.state.showPeople,
+		// 	toggleClicked: this.state.toggleClicked + 1
+		// });
+
+		this.setState((prevState, props) => {
+			return {
+				showPeople: !prevState.showPeople,
+				toggleClicked: prevState.toggleClicked + 1
+			};
+		});
 	};
 
 	render() {
