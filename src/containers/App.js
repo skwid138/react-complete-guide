@@ -9,6 +9,11 @@ import withClass from '../hoc/WithClass';
 /* Their render output should be lean with little JSX */
 /* Containers are stateful and will track and update state */
 
+/* As of 16.3 createContext method can be used, it takes an optional default value as an argument */
+/* props will usually be the prefered method for passing data around, but */
+/* for global data like user auth this is a way to tie components together */
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -96,8 +101,7 @@ class App extends PureComponent {
 			people = <People
 				people={ this.state.people }
 				clicked={ this.deletePersonHandler }
-				changed={ this.nameChangeHandler }
-				isAuthenticated={ this.state.authenticated }/>;
+				changed={ this.nameChangeHandler }/>;
 		}
 		// classes={ classes.App }
 		return (
@@ -109,7 +113,9 @@ class App extends PureComponent {
 					showPeople={ this.state.showPeople }
 					people={ this.state.people }
 					clicked={ this.togglePersonHandler }/>
-				{ people }
+				<AuthContext.Provider value={ this.state.authenticated }>
+					{ people }
+				</AuthContext.Provider>
 			</Aux>
 		);
 	}
