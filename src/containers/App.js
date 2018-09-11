@@ -39,6 +39,21 @@ class App extends PureComponent {
 		console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState);
 	}
 
+	/* Must always return a state object, returning prevState will not change anything */
+	/* called before the page is rendered and mounted */
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log('[UPDATE App.js] Inside getDerivedStateFromProps()', nextProps, prevState);
+		return prevState;
+	}
+
+	/* This is called right before the DOM updates */
+	/* This could be used to get the current scroll position before the DOM changes */
+	/* and then pass that information to componentDidUpdate  */
+	getSnapshotBeforeUpdate() {
+		console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate()');
+		return null;
+	}
+
 	componentDidUpdate() {
 		console.log('[UPDATE App.js] Inside componentDidUpdate()');
 	}
