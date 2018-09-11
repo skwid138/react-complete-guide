@@ -12,6 +12,7 @@ class People extends PureComponent {
 	constructor(props) {
 		super(props);
 		console.log('[People.js] Inside Constructor', props);
+		this.lastPersonRef = React.createRef();
 	}
 
 	/* Happens first */
@@ -51,10 +52,12 @@ class People extends PureComponent {
 	render () {
 		return this.props.people.map((person, index) => {
 			return (<Person
-				key={ person.id }
 				click={ () => this.props.clicked(index) }
 				name={ person.name }
+				position={ index }
 				age={ person.age }
+				ref={ this.lastPersonRef }
+				key={ person.id }
 				changed={ event => this.props.changed(event, person.id) }/>
 			);
 		});
