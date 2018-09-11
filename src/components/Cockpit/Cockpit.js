@@ -28,10 +28,11 @@ const cockpit = props => {
 			<h3>{ props.appTitle }</h3>
   			<p className={ assignedClasses.join(' ') }>Cow Party Anyone?</p>
   			<button
-			  className={ btnClass }
+			  	className={ btnClass }
   				onClick={ props.clicked }>
 				Toggle People
   			</button>
+			<button onClick={ props.login }>Login</button>
 		</Aux>
 	);
 };

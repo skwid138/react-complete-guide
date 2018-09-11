@@ -32,6 +32,7 @@ class Person extends Component {
 		/* ref should mostly be used for focus or media playback not adding style or other dynamic things */
 		return (
 			<Aux>
+				{ this.props.authenticated ? <p>I&apos;m auth&apos;d!</p> : null }
 				<p onClick={ this.props.click }>I&apos;m { this.props.name } and I&apos;m { this.props.age } years old.</p>
 				<p>{ this.props.children }</p>
 				<input
